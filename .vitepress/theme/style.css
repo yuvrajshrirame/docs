@@ -1,0 +1,208 @@
+/* 
+  Minimalist, high-contrast monochrome theme.
+  Eliminates default purple tint for a professional, "Apple-like" aesthetic.
+*/
+
+:root {
+  --vp-c-brand-1: #111111;
+  --vp-c-brand-2: #333333;
+  --vp-c-brand-3: #555555;
+  --vp-c-brand-soft: rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  --vp-c-brand-1: #ffffff;
+  --vp-c-brand-2: #a1a1aa; /* zinc-400 */
+  --vp-c-brand-3: #52525b; /* zinc-600 */
+  --vp-c-brand-soft: rgba(255, 255, 255, 0.05);
+
+  /* Deep space background */
+  --vp-c-bg: #09090b; /* zinc-950 */
+  --vp-c-bg-alt: #000000;
+
+  /* Solid pristine white for the main headline */
+  --vp-home-hero-name-color: #ffffff;
+}
+
+/* 
+  =========================================
+  Typography & Whitespace Refinements
+  =========================================
+*/
+
+/* =========================================
+   BRUTE FORCE NO-SCROLL LAYOUT LOCK
+   ========================================= */
+
+/* Clamp the entire document height to exactly the viewport and destroy the scrollbar */
+html:has(.VPHomeHero),
+html:has(.VPHomeHero) body {
+  height: 100vh !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Eradicate default nav padding to let the hero take pure full height */
+.VPContent.is-home {
+  height: 100vh !important;
+  overflow: hidden !important;
+  padding: 0 !important; 
+}
+
+/* Pull the hero section into the absolute optical vertical center */
+.VPHomeHero {
+  margin: 0 !important; /* Defeat VitePress's negative margin */
+  height: 100vh !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: var(--vp-nav-height) !important; /* Push text down to optically center */
+  padding-bottom: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Eradicate ghost blocks and invisible footers */
+.VPHomeContent,
+.VPFooter {
+  display: none !important;
+}
+
+/* Force absolute center alignment for the Hero section on desktop (VitePress defaults to left-aligned on min-width: 960px) */
+@media (min-width: 960px) {
+  .VPHomeHero .name,
+  .VPHomeHero .text,
+  .VPHomeHero .tagline {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .VPHomeHero .actions {
+    justify-content: center !important;
+  }
+}
+
+/* Tighten tracking and decrease size for a premium, minimal editorial look */
+.VPHomeHero .name {
+  letter-spacing: -0.05em !important;
+  font-weight: 800 !important;
+  font-size: clamp(1.75rem, 5vw, 2.75rem) !important;
+  line-height: 1.1 !important;
+}
+
+/* The secondary headline */
+.VPHomeHero .text {
+  letter-spacing: -0.03em !important;
+  font-weight: 600 !important;
+  color: var(--vp-c-text-1) !important;
+  white-space: nowrap !important;
+  font-size: clamp(1.2rem, 5vw, 3rem) !important;
+}
+
+/* Add breathing room to the tagline and adjust line height for readability */
+.VPHomeHero .tagline {
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.6 !important;
+  padding-top: 1.5rem !important;
+  color: var(--vp-c-text-2) !important;
+}
+
+/* Responsive constraints for mobile: allow wrapping and add padding */
+@media (max-width: 768px) {
+  .VPHomeHero .name {
+    white-space: normal !important;
+    padding: 0 1.5rem !important;
+  }
+  .VPHomeHero .tagline {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+/* Force single line on desktop */
+@media (min-width: 769px) {
+  .VPHomeHero .name {
+    white-space: nowrap !important;
+  }
+}
+
+/* Refine the action buttons to look sharp and minimal */
+.VPButton.brand {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  transition: all 0.2s ease !important;
+}
+
+.VPButton.brand:hover {
+  opacity: 0.9 !important;
+  transform: translateY(-1px) !important;
+}
+
+.VPButton.alt {
+  border-radius: 8px !important;
+  background-color: transparent !important;
+  border: 1px solid var(--vp-c-divider) !important;
+}
+
+.VPButton.alt:hover {
+  border-color: var(--vp-c-text-2) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+}
+
+.VPHomeHero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 
+  Subtle ambient background texture. 
+  Instead of an "AI" glowing orb, this uses a very faint, 
+  immaculate radial gradient to give the canvas depth without clutter.
+*/
+.VPHomeHero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.03) 0%, rgba(9,9,11,0) 70%);
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* 
+  Majestic Sonar/Radar Scanner background 
+  Anchored at the top-right corner to sweep dynamically across the page.
+*/
+.VPHomeHero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: auto; /* Remove previous left anchoring */
+  transform: translate(50%, -50%); /* Anchor the exact center of the SVG to the top right corner */
+  width: 120vw;
+  height: 120vw;
+  min-width: 800px;
+  min-height: 800px;
+  max-width: 1400px;
+  max-height: 1400px;
+  background-image: url('/radar-bg.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Invert the wireframe colors for Light Mode */
+html:not(.dark) .VPHomeHero::after {
+  filter: invert(1);
+}

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <style>
+    .ring { stroke: rgba(255,255,255,0.04); stroke-width: 1.5; fill: none; }
+    .ring-thick { stroke: rgba(255,255,255,0.08); stroke-width: 2; stroke-dasharray: 4 16; fill: none; }
+    .line { stroke: rgba(255,255,255,0.03); stroke-width: 1.5; fill: none; }
+    .sweep { transform-origin: 500px 500px; animation: scan 10s linear infinite; }
+    .node { fill: rgba(255,255,255,0.7); animation: pulse 3s ease-out infinite; }
+    @keyframes scan { 100% { transform: rotate(360deg); } }
+    @keyframes pulse { 0% { opacity: 1; r: 1; } 100% { opacity: 0; r: 15; } }
+  </style>
+  
+  <g>
+    <!-- Concentric Sonar Rings -->
+    <circle cx="500" cy="500" r="150" class="ring" />
+    <circle cx="500" cy="500" r="300" class="ring-thick" />
+    <circle cx="500" cy="500" r="450" class="ring" />
+    <circle cx="500" cy="500" r="600" class="ring-thick" />
+    <circle cx="500" cy="500" r="750" class="ring" />
+    <circle cx="500" cy="500" r="900" class="ring" stroke-dasharray="2 12" />
+    
+    <!-- Topographic Crosshairs -->
+    <line x1="500" y1="-400" x2="500" y2="1400" class="line" />
+    <line x1="-400" y1="500" x2="1400" y2="500" class="line" />
+    <line x1="-136" y1="-136" x2="1136" y2="1136" class="line" />
+    <line x1="-136" y1="1136" x2="1136" y2="-136" class="line" />
+  </g>
+  
+  <!-- Sweeping Sonar Scanner Line with trailing ghost sector -->
+  <g class="sweep">
+    <path d="M 500,500 L 500,-400 A 900,900 0 0,0 -136,-136 Z" fill="rgba(255,255,255,0.015)" />
+    <line x1="500" y1="500" x2="500" y2="-400" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+    <line x1="500" y1="500" x2="500" y2="-400" stroke="rgba(255,255,255,0.08)" stroke-width="8" />
+  </g>
+
+  <!-- Faint Data Nodes / Sonar Pings -->
+  <circle cx="500" cy="500" r="4" fill="rgba(255,255,255,0.2)" />
+  <circle cx="712" cy="712" r="4" class="node" style="animation-delay: 0s;" />
+  <circle cx="350" cy="800" r="4" class="node" style="animation-delay: 5s;" />
+  <circle cx="950" cy="500" r="4" class="node" style="animation-delay: 3s;" />
+  <circle cx="200" cy="350" r="4" class="node" style="animation-delay: 8s;" />
+</svg>
