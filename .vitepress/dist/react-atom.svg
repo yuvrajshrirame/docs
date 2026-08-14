@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <style>
+    .orbit {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.04);
+      stroke-width: 1.5;
+    }
+    .atom {
+      transform-origin: 500px 500px;
+      animation: spin 90s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <g class="atom">
+    <!-- Path 1 (0 deg) -->
+    <path id="p1" class="orbit" d="M 100,500 A 400,140 0 1,0 900,500 A 400,140 0 1,0 100,500" />
+    <circle r="3" fill="rgba(255,255,255,0.4)">
+      <animateMotion dur="6s" repeatCount="indefinite"><mpath href="#p1" /></animateMotion>
+    </circle>
+
+    <!-- Path 2 (120 deg) -->
+    <g transform="rotate(120 500 500)">
+      <path id="p2" class="orbit" d="M 100,500 A 400,140 0 1,0 900,500 A 400,140 0 1,0 100,500" />
+      <circle r="3" fill="rgba(255,255,255,0.4)">
+        <animateMotion dur="6s" begin="2s" repeatCount="indefinite"><mpath href="#p2" /></animateMotion>
+      </circle>
+    </g>
+
+    <!-- Path 3 (240 deg) -->
+    <g transform="rotate(240 500 500)">
+      <path id="p3" class="orbit" d="M 100,500 A 400,140 0 1,0 900,500 A 400,140 0 1,0 100,500" />
+      <circle r="3" fill="rgba(255,255,255,0.4)">
+        <animateMotion dur="6s" begin="4s" repeatCount="indefinite"><mpath href="#p3" /></animateMotion>
+      </circle>
+    </g>
+    
+    <!-- Core -->
+    <circle cx="500" cy="500" r="4" fill="rgba(255,255,255,0.15)" />
+  </g>
+</svg>

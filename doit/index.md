@@ -1,16 +1,16 @@
 ---
 layout: home
 footer: false
-
-hero:
-  name: "do.it Documentation"
-  text: "The Liquid Glass Tracker."
-  tagline: "Deep dives into the Anonymous-First Auth, robust streak algorithms, and fluid Framer Motion animations that power do.it."
-  actions:
-    - theme: brand
-      text: Explore Architecture
-      link: /doit/architecture
-    - theme: alt
-      text: View Source
-      link: https://github.com/yuvrajshrirame/do-it
 ---
+
+<div class="custom-hero-wrapper">
+  <div class="custom-hero">
+    <h1 class="name">do.it Documentation</h1>
+    <h2 class="text">The Liquid Glass Tracker.</h2>
+    <p class="tagline">Deep dives into the Anonymous-First Auth, robust streak algorithms, and fluid Framer Motion animations that power do.it.</p>
+    <div class="actions">
+      <a class="VPButton brand" href="/doit/architecture">Explore Architecture</a>
+      <a class="VPButton brand" href="https://github.com/yuvrajshrirame/do-it" target="_blank" rel="noreferrer">View Source</a>
+    </div>
+  </div>
+</div>

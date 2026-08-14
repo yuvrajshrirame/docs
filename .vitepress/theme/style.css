@@ -35,8 +35,8 @@
    ========================================= */
 
 /* Clamp the entire document height to exactly the viewport and destroy the scrollbar */
-html:has(.VPHomeHero),
-html:has(.VPHomeHero) body {
+html:has(.custom-hero-wrapper),
+html:has(.custom-hero-wrapper) body {
   height: 100vh !important;
   overflow: hidden !important;
   margin: 0 !important;
@@ -50,82 +50,92 @@ html:has(.VPHomeHero) body {
   padding: 0 !important; 
 }
 
-/* Pull the hero section into the absolute optical vertical center */
-.VPHomeHero {
-  margin: 0 !important; /* Defeat VitePress's negative margin */
-  height: 100vh !important;
-  min-height: 100vh !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding-top: var(--vp-nav-height) !important; /* Push text down to optically center */
-  padding-bottom: 0 !important;
-  box-sizing: border-box !important;
-}
-
 /* Eradicate ghost blocks and invisible footers */
 .VPHomeContent,
 .VPFooter {
   display: none !important;
 }
 
-/* Force absolute center alignment for the Hero section on desktop (VitePress defaults to left-aligned on min-width: 960px) */
-@media (min-width: 960px) {
-  .VPHomeHero .name,
-  .VPHomeHero .text,
-  .VPHomeHero .tagline {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
+/* 
+  =========================================
+  Custom Hero Layout Engine (Bypassing VitePress defaults)
+  =========================================
+*/
+.custom-hero-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  margin-left: calc(-50vw + 50%); /* Force full bleed across the screen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--vp-nav-height) 24px 0 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: left !important;
+}
 
-  .VPHomeHero .actions {
-    justify-content: center !important;
+@media (min-width: 640px) {
+  .custom-hero-wrapper {
+    padding-left: 64px;
+    padding-right: 64px;
   }
 }
 
+@media (min-width: 960px) {
+  .custom-hero-wrapper {
+    padding-left: 15vw; /* Deep editorial indent on large screens */
+  }
+}
+
+.custom-hero {
+  max-width: 800px; /* Constrain text width for readability */
+}
+
+
 /* Tighten tracking and decrease size for a premium, minimal editorial look */
-.VPHomeHero .name {
+.custom-hero .name {
   letter-spacing: -0.05em !important;
   font-weight: 800 !important;
-  font-size: clamp(1.75rem, 5vw, 2.75rem) !important;
+  font-size: clamp(2rem, 8vw, 4rem) !important;
   line-height: 1.1 !important;
+  margin: 0 0 0.2rem 0 !important;
 }
 
 /* The secondary headline */
-.VPHomeHero .text {
+.custom-hero .text {
   letter-spacing: -0.03em !important;
   font-weight: 600 !important;
   color: var(--vp-c-text-1) !important;
-  white-space: nowrap !important;
-  font-size: clamp(1.2rem, 5vw, 3rem) !important;
+  font-size: clamp(1.4rem, 5vw, 3rem) !important;
+  margin: 0 !important;
 }
 
 /* Add breathing room to the tagline and adjust line height for readability */
-.VPHomeHero .tagline {
-  font-size: clamp(0.9rem, 1.5vw, 1.15rem) !important;
+.custom-hero .tagline {
+  font-size: clamp(1rem, 2vw, 1.25rem) !important;
   letter-spacing: -0.01em !important;
   line-height: 1.6 !important;
   padding-top: 1.5rem !important;
   color: var(--vp-c-text-2) !important;
+  margin: 0 !important;
+}
+
+.custom-hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 2rem;
 }
 
 /* Responsive constraints for mobile: allow wrapping and add padding */
 @media (max-width: 768px) {
-  .VPHomeHero .name {
-    white-space: normal !important;
-    padding: 0 1.5rem !important;
-  }
-  .VPHomeHero .tagline {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-  }
-}
-
-/* Force single line on desktop */
-@media (min-width: 769px) {
-  .VPHomeHero .name {
-    white-space: nowrap !important;
+  .custom-hero .name,
+  .custom-hero .text {
+    word-break: keep-all !important; /* Prevent awkward mid-word breaks */
+    overflow-wrap: normal !important;
   }
 }
 
@@ -163,7 +173,7 @@ html:has(.VPHomeHero) body {
   Instead of an "AI" glowing orb, this uses a very faint, 
   immaculate radial gradient to give the canvas depth without clutter.
 */
-.VPHomeHero::before {
+.custom-hero-wrapper::before {
   content: '';
   position: absolute;
   top: 0;
@@ -180,7 +190,7 @@ html:has(.VPHomeHero) body {
   Majestic Sonar/Radar Scanner background 
   Anchored at the top-right corner to sweep dynamically across the page.
 */
-.VPHomeHero::after {
+.custom-hero-wrapper::after {
   content: '';
   position: absolute;
   top: 0;
@@ -203,6 +213,6 @@ html:has(.VPHomeHero) body {
 }
 
 /* Invert the wireframe colors for Light Mode */
-html:not(.dark) .VPHomeHero::after {
+html:not(.dark) .custom-hero-wrapper::after {
   filter: invert(1);
 }
