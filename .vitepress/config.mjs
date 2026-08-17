@@ -27,7 +27,8 @@ export default withMermaid(
           items: [
             { text: '2ndBrain', link: '/2ndbrain/' },
             { text: 'VERTO', link: '/verto/' },
-            { text: 'do.it', link: '/doit/' }
+            { text: 'do.it', link: '/doit/' },
+            { text: 'do.it (MERN)', link: '/doit-mern/' }
           ]
         }
       ],
@@ -100,6 +101,25 @@ export default withMermaid(
               { text: 'Features Deep Dive', link: '/doit/features' },
               { text: 'Database Schema', link: '/doit/database' },
               { text: 'Component Breakdown', link: '/doit/components' }
+            ]
+          }
+        ],
+        '/doit-mern/': [
+          {
+            text: 'Overview',
+            items: [
+              { text: 'Architecture', link: '/doit-mern/architecture' },
+              { text: 'Setup & Deployment', link: '/doit-mern/setup-and-deployment' }
+            ]
+          },
+          {
+            text: 'Technical Details',
+            items: [
+              { text: 'Express Backend API', link: '/doit-mern/backend-api' },
+              { text: 'Authentication Flow', link: '/doit-mern/authentication-flow' },
+              { text: 'Features Deep Dive', link: '/doit-mern/features' },
+              { text: 'Database Schema', link: '/doit-mern/database' },
+              { text: 'Component Breakdown', link: '/doit-mern/components' }
             ]
           }
         ]
